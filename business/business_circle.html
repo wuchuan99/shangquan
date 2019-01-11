@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0" user-scalable="no"/>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>我的商圈</title>
+    <link rel="stylesheet" href="../assets/mui-master/dist/css/mui.min.css">
+    <link rel="stylesheet" href="../css/reset.css">
+    <link rel="stylesheet" href="../pages/business_circle/css/business_circle.css">
+</head>
+<body>
+    <div class="layout-header">
+        <!-- <header>
+            <span>我的商圈</span>
+            <a href="javascript:;" class="back"><img src="../pages/business_circle/images/back.png" alt=""></a>
+        </header> -->
+        <div class="img">
+            <a href="../business/city_business.html"><img src="../pages/business_circle/images/shangquan.jpg" alt=""></a>
+        </div>
+    </div>
+    <!-- <input type="hidden" id="refreshed" value="no"> -->
+    <div class="mui-scroll-wrapper layout-content">
+        <div class="mui-scroll">
+            <ul class="list">
+                
+            </ul>
+        </div>
+    </div>
+    <div class="zw" style="font-size: 0.4rem; display: none">
+        <h3 >暂无商圈</h3>
+    </div>
+    <script type="text/html" id="temp">
+        {{each data}}
+        <li data-id="{{$value.id}}" data-bdRemark="{{$value.bdRemark}}" data-isLeader="{{$value.isLeader}}">
+            <div class="left">
+                <img src="{{$value.bdPic}}" alt="">
+            </div>
+            <div class="right">
+                <h4>
+                    <span>{{$value.bdName}}</span>
+                    {{if $value.isLeader == 3}}
+                    <img src="../pages/business_circle/images/t1.png" alt="">
+                    {{else if $value.isLeader == 2}}
+                    <img class="council" src="../pages/shop_list/images/council.png" alt="">
+                    {{/if}}
+                    <!-- <img src="../pages/business_circle/images/t2.png" alt=""> -->
+                </h4>
+                <p>
+                    <img src="../pages/business_circle/images/t3.png" alt="">
+                    <span>共有<i>{{$value.shopCount}}</i>家店铺</span>
+                </p>
+            </div>
+        </li>
+        {{/each}}
+    </script>
+</body>
+    <script>
+        window.addEventListener('pageshow', function (event) {
+            if (event.persisted) {
+                window.location.reload(); 
+            } 
+        });
+    </script>
+    <script src="../js/rem.js"></script>
+    <script src="../js/jquery.min.js"></script>
+    <script src="../assets/art-template/lib/template-web.js"></script>
+    <script src="../assets/layer/layer.js"></script>
+    <script src="../js/util.js"></script>
+    <script src="../assets/mui-master/dist/js/mui.min.js"></script>
+    <script src="../pages/business_circle/js/business_circle.js"></script>
+</html>

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0" user-scalable="no"/>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title></title>
+    <link rel="stylesheet" href="../assets/mui-master/dist/css/mui.min.css">
+    <link rel="stylesheet" href="../css/reset.css">
+    <link rel="stylesheet" href="../pages/shop_list/css/shop_list.css">
+</head>
+<body>
+    <div class="layout">
+        <header>
+            <span class="header"></span>
+            <!-- <a href="javascript:;" class="back"><img src="../pages/shop_list/images/back.png" alt=""></a> -->
+            <a href="javascript:;" class="editBusiness"><img src="../pages/shop_list/images/nav_edit.png" alt=""></a>
+            <a href="../business/message_list.html" class="message"><img src="../pages/shop_list/images/nav_message.png" alt=""><span></span></a>
+        </header>
+        <div class="mui-scroll-wrapper content" id="pullrefresh">
+            <div class="mui-scroll">
+                <ul class="mui-table-view list">
+    
+                </ul>
+            </div>
+        </div>
+    </div>
+    <script type="text/html" id="temp">
+        {{each newData}}
+        <li class="mui-table-view-cell mui-transitioning mui-media" data-id="{{$value.id}}" data-isLeader="{{$value.isLeader}}">
+            {{if $value.merchantId == merchantId}}
+                {{if isLeader == 3}}
+                    {{if $value.isLeader == 3}}
+                    {{else if  $value.isLeader == 2}}
+                    <div class="mui-slider-right mui-disabled">
+                        <span class="mui-btn mui-btn-blue editOut">移出圈委会</span>
+                        <span class="mui-btn delete">移除店铺</span>
+                    </div>
+                    {{else if  $value.isLeader == 0}}
+                    <div class="mui-slider-right mui-disabled">
+                        <span class="mui-btn mui-btn-blue edit">设为圈委会</span>
+                        <span class="mui-btn delete">移除店铺</span>
+                    </div>
+                    {{/if}}
+                {{else if isLeader == 2}}
+                    {{if $value.isLeader == 2}}
+                    <div class="mui-slider-right mui-disabled">
+                        <span class="mui-btn mui-btn-red del">退出商圈</span>
+                    </div>
+                    {{else if $value.isLeader == 0}}
+                    <div class="mui-slider-right mui-disabled">
+                        <span class="mui-btn delete">移除店铺</span>
+                    </div>
+                    {{/if}}
+                {{else if isLeader == 0}}
+                    <div class="mui-slider-right mui-disabled">
+                        <span class="mui-btn mui-btn-red del">退出商圈</span>
+                    </div>
+                {{/if}}
+               
+            {{else if isLeader == 3}}
+            <div class="mui-slider-right mui-disabled">
+                {{if $value.isLeader == 2}}
+                <span class="mui-btn mui-btn-blue editOut">移出圈委会</span>
+                {{else if $value.isLeader == 0}}
+                <span class="mui-btn mui-btn-blue edit">设为圈委会</span>
+                {{/if}}
+                <span class="mui-btn delete">移除店铺</span>
+            </div>
+            {{else if isLeader == 2 && $value.isLeader == 0}}
+            <div class="mui-slider-right mui-disabled">
+                <span class="mui-btn delete">移除店铺</span>
+            </div>
+            {{/if}}
+            <div class="mui-slider-handle">
+                <div class="left">
+                    <img src="{{$value.logoUrl}}" alt="">
+                </div>
+                <div class="right">
+                    <h4>
+                        <span>{{$value.shopName}}</span>
+                        {{if $value.isLeader == 3}}
+                        <img class="leader" src="../pages/business_circle/images/t1.png" alt="">
+                        {{else if $value.isLeader == 2}}
+                        <img class="council" src="../pages/shop_list/images/council.png" alt="">
+                        {{/if}}
+                        {{if  $value.merchantId == merchantId}}
+                        <div class="myself">我</div>
+                        {{/if}}
+                    </h4>
+                    <p><img src="../pages/shop_list/images/location.png" alt=""><span>{{$value.detailedAddress || '暂无'}}</span></p>
+                    <p><img src="../pages/shop_list/images/phone.png" alt=""><span>{{$value.phoneService || '暂无'}}</span></p>
+                </div>
+            </div>
+        </li>
+        {{/each}}
+    </script>
+</body>
+    <script>
+        window.addEventListener('pageshow', function (event) {
+            if (event.persisted) {
+                window.location.reload(); 
+            } 
+        });
+    </script>
+    <script src="../js/rem.js"></script>
+    <script src="../js/jquery.min.js"></script>
+    <script src="../assets/art-template/lib/template-web.js"></script>
+    <script src="../assets/mui-master/dist/js/mui.min.js"></script>
+    <script src="../assets/layer/layer.js"></script>
+    <script src="../js/util.js"></script>
+    <script src="../pages/shop_list/js/shop_list.js"></script>
+</html>

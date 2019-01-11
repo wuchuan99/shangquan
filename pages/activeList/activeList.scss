@@ -1,0 +1,198 @@
+
+@function vm($px) {
+    @return ($px / 750) * 100vw;
+  }
+  @mixin ell() {
+    overflow: hidden;
+    -ms-text-overflow: ellipsis;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  $vm_base: 750;
+  $color_base:#333333;
+  $wihte:#fff;
+  $dark:#000;
+  $bdc:#dadada;
+  $bdt:#f0eeee;
+  $c999:#999999;
+  $c666:#666666;
+  $color_main:#428efe;
+  $font_h3:vm(36);
+  $font_p:vm(28);
+  $font_num:vm(40);
+  ul,li,dd,dt{
+    box-sizing: border-box;
+  }
+  .tac{
+    text-align: center;}
+  .h3{
+    font-size:$font_h3;
+  }
+  .p{
+    font-size:$font_p;
+  }
+  .font-num{
+    font-size:$font_num;
+  }
+  .c666{
+    color: $c666;}
+  .c999{
+    color: $c999;
+  }
+  .p24{
+    padding:0 vm(24);}
+  .border-radius10{
+    border-radius: vm(10);
+  }
+  .border-radius5{
+    border-radius: vm(5);
+  }
+  .posr{
+    position: relative;}
+  *{box-sizing: border-box;}
+  body,html{
+    width:100%;
+    height: 100%;background: #f0eeee;}
+  body{font-family: "Helvetica Neue", Helvetica, "PingFang SC", '微软雅黑', Tahoma, Arial, sans-serif;
+    color: $color_base;}
+  .app{
+    width: 100%;
+    overflow: hidden;
+    // margin-top:0;
+    margin-top: vm(88);
+    
+  }
+  a{
+    color: $color_base;
+  }
+  a:hover{
+    color: $color_base;
+  }
+  h2.tit{
+    position: relative!important;
+    width: 100%;
+    padding: 0!important;
+  }
+  .tit{
+    position: fixed;
+    top: 0;left: 0;
+    width: 100%;
+    height: vm(88);
+    background:$wihte ;
+    line-height:vm(88) ;
+    text-align: center;
+    font-size:$font_h3;
+    font-weight: normal;
+    border-bottom:1px solid #eeeeee;
+    &_back{
+      position: absolute;
+      left:vm(24);
+      top: 50%;
+      width:vm(28);
+      height:vm(46);
+      margin-top:vm(-23);
+      img{
+          width: 100%;
+      }
+    }
+    &_shop{
+        position: relative;
+        display: inline-block;
+        img{
+            position: absolute;
+            right: vm(-15);
+            bottom: vm(20);
+            width: vm(15);
+            height: vm(15);
+        }
+    }
+    
+    &_calendar{
+        position: absolute;
+        right:vm(40);
+        top: 50%;
+        width:vm(40);
+        height:vm(40);
+        margin-top:vm(-20);  
+    }
+  }
+  .list_ul{
+    
+    li{height: vm(170);padding:vm(6) vm(25);
+        background: #fff;
+    }
+    .list_li{
+        margin-bottom: vm(20);
+        &_div{
+            font-size: $font_p;
+            background: url(../../img/list-name@2x.png) no-repeat 0 center;
+            background-size: vm(30) auto;
+            line-height: vm(53);
+            text-indent: vm(50);
+        }
+        &_time{
+            background: url(../../img/list-time@2x.png) no-repeat 0 center;
+            background-size: vm(30) auto;
+        }
+        &_phone{
+            background: url(../../img/list-phone@2x.png) no-repeat 0 center;
+            background-size: vm(30) auto;
+        }
+        &_source{
+            float: right;
+            color:$c999;
+            font-size: vm(26);
+        }
+    }
+  }
+  .dialog_box {
+    .getDateBox{
+      background: #f2f2f2;
+    }
+  }
+  .shopList{
+    width: 100%;
+    margin: 0;
+    min-height: 50px;
+    overflow: hidden;
+    position: relative;
+    text-align: center;
+    line-height: vm(100);
+    color: #1178ED;
+    font-size: vm(30);
+    margin-bottom: vm(10);
+    background:#fff;
+    li{
+      border-bottom: 1px solid #eeeeee;
+    }
+  }
+  .cancelBox{
+    background:#fff;
+    line-height: vm(100);
+    text-align:center;
+    font-size: vm(30);
+  }
+  .searchBox{
+    text-indent: vm(75);
+    background:#3b82ee url(../../img/calendar.png) no-repeat vm(30) center;
+    background-size:vm(30) auto;
+    height: vm(66);
+    line-height: vm(66);
+    color: #fff;
+    font-size: vm(24);
+    i{
+      margin-top: vm(20);
+      margin-right: vm(30);
+      float: right;
+      width: vm(22);
+      height: vm(22);
+    }
+    img{
+      width: 100%;
+      height: 100%;
+    }
+  }
+  .nodata{
+    text-align:center;
+    line-height: vm(170);
+  }

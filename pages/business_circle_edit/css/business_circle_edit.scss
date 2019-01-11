@@ -1,0 +1,119 @@
+body {
+    background-color: #F0EEEE;
+    .footer {
+        position: absolute;
+        width: 7.02rem;
+        height: 0.8rem;
+        left: 0.24rem;
+        bottom: 0.49rem;
+        font-size: 0.3rem;
+        line-height: 0.8rem;
+        a {
+            float: left;
+            width: 3rem;
+            height: 0.8rem;
+            line-height: 0.8rem;
+            display: block;
+            text-align: center;
+            background-color: #3B82EE;
+            color: #fff;
+            border-radius: 0.08rem;
+            &:last-child {
+                float: right; 
+            }
+        }
+    }
+}
+.layout {
+    header {
+        background-color: #fff;
+        height:1.12rem;
+        line-height: 1.12rem;
+        font-size: 0.34rem;
+        font-weight: 600;
+        text-align: center;
+        position: relative;
+        color: #333;
+        .back {
+            position: absolute;
+            width: 0.22rem;
+            height: 0.4rem;
+            left: 0.24rem;
+            top: 0.36rem;
+            img {
+                width: 100%;
+                transform: rotate(180deg);
+            }
+        }
+    }
+    .upload {
+        padding-top: 0.3rem;
+        background-color: #fff;
+        height: 2.86rem;
+        text-align: center;
+        margin-bottom: 0.3rem;
+        padding-top: .2rem;
+        .img {
+           width: 1.82rem;
+           height: 1.82rem;
+           margin:  0 auto;
+           overflow: hidden;
+           img {
+               width: 100%;
+               height: auto;
+           }
+        }
+        p {
+            font-size: 0.34rem;
+            color: #333;
+        }
+    }
+    .content {
+        height: 2.9rem;
+        background-color: #fff;
+        font-size: 0.3rem;
+        padding: 0 0.33rem 0 0.16rem;
+        h4 {
+            height: 0.95rem;
+            line-height: 0.95rem;
+            border-bottom: 1px solid #eee;
+            .left {
+                float: left;
+                color: #333;
+            }
+            input {
+                float: right;
+                color: #666;
+                height: 0.6rem;
+                margin-top: 0.18rem;
+                border: none;
+                outline:none;
+                font-size: 0.3rem;
+                width: 5.62rem;
+                -webkit-user-select: auto;  
+            }
+        }
+        div {
+            height: 1.94rem;
+            padding-top: 0.1rem;
+            span {
+                float: left;
+                color: #333;   
+            }
+            textarea {
+                width: 5.4rem;
+                height: 90%;
+                float: right;
+                color: #666;
+                line-height: 0.5rem;
+                font-size: 0.3rem;
+                outline:none;
+                border: none;
+                resize:none;
+            }
+        }
+    }
+}
+// .moxie-shim {
+//     z-index: 100 !important;
+// }

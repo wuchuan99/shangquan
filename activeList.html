@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>累计佣金</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0" user-scalable="no" />
+
+
+
+    <link rel="stylesheet" type="text/css" href="css/reset.css" />
+    <link rel="stylesheet" href="assets/swiper-4.0.7/dist/css/swiper.min.css" />
+    <link rel="stylesheet" href="css/dropload.css">
+    <link rel="stylesheet" type="text/css" href="pages/activeList/activeList.css">
+    <style>
+        .getDateBox .choiceDateTitle button{
+            color: #3B82EE!important;
+        }
+        #dateCancel{
+            color: #999999!important;
+        }
+        .getDateBox .choiceDateTitle{
+            display: flex;
+            justify-content:space-around;
+            background: #fff!important;
+        }
+        .changeBox{
+            margin:0 auto;
+            height: 60%;
+            margin-top: 0.5rem;
+            text-align: center;
+            border: 1px solid #3B82EE;
+            border-radius: 5px;
+        }
+        .changeBox{
+            
+        }
+        .getDateBox .changeBox button{
+            padding: 0 0.5rem!important;
+        }
+        .getDateBox .changeBox button.active{
+            background: #3B82EE;
+            color: #fff!important;
+        }
+        .timeInputBox{
+            display: none;
+            justify-content:space-around;
+            margin-top: 2rem;
+        }
+        .timeInputBox input{
+            border:none;
+            border-bottom: 1px solid #eeeeee;
+            text-align: center;
+            color: #000;
+        }
+        ::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+            color: #000;
+        }
+        
+    </style>
+</head>
+
+<body class="gray-bg">
+    <!--  -->
+    <div class="app clearfix" id="app" v-cloak>
+        <div class="tit">
+            <!-- <a href="javascript:;" class="tit_back"><img src="img/back.png" alt=""></a> -->
+            <span class="tit_shop" style="display:none;">{{shopNames}} <img src="img/arrow-down@2x.png"
+                    alt=""></span><img id="tit_calendar" class="tit_calendar" src="img/list-calendar-black.png" alt="">
+        </div>
+        <div class="searchBox" v-show="startTime">
+            {{startTime}} ~ {{endTime}} 的记录 <i><img id="searchCancel" src="img/close@2x.png" alt=""></i>
+        </div>
+        <ul class="list_ul lists">
+            <li class="list_li" v-for="item in itemList">
+                <div class="list_li_div">{{item.userName}}</div>
+                <div class="list_li_div list_li_phone ">{{item.userPhone}}</div>
+                <div class="list_li_div list_li_time">{{item.createTime}} <span class="list_li_source">访问来源：{{item.visitFromName}}</span></div>
+            </li>
+        </ul>
+    </div>
+    <div class="dialog_box" style="display:none">
+        <section class="getDateBg"></section>
+        <section class="getDateBox">
+                <ul class="shopList">
+                 
+                </ul>
+                <div class="cancelBox">取消</div>
+        </section>
+    </div>
+    <div id="MdatePlugin" style="display:none" >
+        <input type="hidden" id="dateSelectorOne">
+        <section class="getDateBg"></section>
+        <section class="getDateBox" id="getDateBox">
+            <div class="choiceDateTitle">
+                <button id="dateCancel" class="fl">取消</button>
+                <div class="changeBox"><button data-type="1" id="evenDay" class="active">单日</button><button id="doubleDay" data-type="2">跨日</button></div>
+                <button id="dateSure" class="fr">确定</button>
+            </div>
+            <div class="timeInputBox">
+                <input type="text" readonly="" placeholder="开始时间"  id="dateSelect1">
+                <span>至</span>
+                <input type="text" readonly="" placeholder="结束时间" id="dateSelect2">
+            </div>
+            <div class="dateContent">
+            </div>
+    </section>
+</div>
+
+
+</body>
+<script src="js/jquery.min.js"></script>
+<script src="pages/pageThree/vue.js"></script>
+<script src="js/dropload.min.js"></script>
+<script src="assets/layer/layer.js"></script>
+<script src="js/util.js"></script>
+
+
+<script src="assets/Mdate/iScroll.js"></script>
+<script src="assets/Mdate/Mdate.js"></script>
+
+<script type="text/javascript">
+    // new Mdate("dateSelectorOne");
+
+</script>
+
+<script>
+    //    $('.app').hide();
+    var userId = GetQueryString('userId');
+    var merchantId = GetQueryString('merchantId');
+    var orgName = decodeURI(GetQueryString('orgName'));
+
+    var USER_URL = {
+        //        GETDATA:'user/commissionsDetails',//获取相关信息
+        GETLIST: 'shop/visitorListData',//获取分页
+        GETMERCHANTSHOP:'backUser/listMerShops',//获取商户下面的店铺信息
+    }
+    var VUEDATA = {
+        itemList: [],
+        total: 0,
+        shopNames:'',
+        shopIds:'',
+        startTime:'',
+        endTime:'',
+
+    }
+    var app = new Vue({
+        el: '#app',
+        data: VUEDATA,
+        created: function () {
+            console.log(this.$data)
+            console.log(orgName)
+            this.getMerchantShop().done(function(){
+                getData()
+            })
+        },
+        methods:{
+            getMerchantShop:function(){
+                var params  ={
+                    userId:userId,
+                    merchantId:merchantId
+                }
+                return reqAjaxAsync(USER_URL.GETMERCHANTSHOP,JSON.stringify(params)).done(function(res){
+                    if(res.code == 1){
+                        console.log(res)
+                        var datas = res.data;
+                        var str = ``
+                        if(datas.length){
+                            VUEDATA.shopNames = datas[0].shopName;
+                            VUEDATA.shopIds = datas[0].id;
+                            $.each(datas,function(i,item){
+                                str+=`<li data-id="${item.id}">${item.shopName}</li>`
+                            })
+                            $(".shopList").html(str);
+                            $(".tit_shop").show();
+                        }
+                    }
+                })
+            }
+        },
+        mounted: function () {
+            var dates = new Date();
+            new Mdate("tit_calendar", {
+                        acceptId: "dateSelectorOne",
+                        beginYear: "2015",
+                        beginMonth: "1",
+                        beginDay: "1",
+                        endYear: dates.getFullYear(),
+                        endMonth: "12",
+                        endDay: "31",
+                        format: "-"
+            })
+            new Mdate("dateSelect1", {
+                        acceptId: "dateSelect1",
+                        beginYear: "2015",
+                        beginMonth: "1",
+                        beginDay: "1",
+                        endYear: dates.getFullYear(),
+                        endMonth: "12",
+                        endDay: "31",
+                        format: "-"
+            })
+            new Mdate("dateSelect2", {
+                        acceptId: "dateSelect2",
+                        beginYear: "2015",
+                        beginMonth: "1",
+                        beginDay: "1",
+                        endYear: dates.getFullYear(),
+                        endMonth: "12",
+                        endDay: "31",
+                        format: "-"
+            })
+            $(".tit_shop").click(function(){
+                $(".dialog_box").addClass('slideIn').removeClass('slideOut')
+                $(".dropload-down").remove();
+            })
+            $(".tit_back").click(function(){
+                window.location.href='myBusiness.html?merchantId='+merchantId+'&userId='+userId+'&orgName='+ encodeURI(encodeURI(orgName))
+            })
+            $(".cancelBox").click(function(){
+                
+                $(".dialog_box").addClass('slideOut').removeClass('slideIn')
+            })
+            $(".shopList").on('click','li',function(){
+                $(".dialog_box").addClass('slideOut').removeClass('slideIn')
+                VUEDATA.shopNames = $(this).text()
+                VUEDATA.shopIds = $(this).attr('data-id')
+                VUEDATA.itemList = [];
+                getData(VUEDATA.startTime,VUEDATA.endTime)
+            })
+            $("#searchCancel").on('click',function(){
+                VUEDATA.startTime ='';
+                VUEDATA.endTime = '';
+                VUEDATA.itemList = [];
+                $(".dropload-down").remove();
+                getData(VUEDATA.startTime,VUEDATA.endTime)
+            })
+            $("#tit_calendar").click(function () {
+                $("#MdatePlugin").addClass('slideIn')
+                $(".changeBox button[data-type=1]").addClass('active').siblings().removeClass('active')
+                $(".timeInputBox").css({'display':'none'})
+                new Mdate("evenDay", {
+                        acceptId: "dateSelectorOne",
+                        beginYear: "2015",
+                        beginMonth: "1",
+                        beginDay: "1",
+                        endYear: dates.getFullYear(),
+                        endMonth: "12",
+                        endDay: "31",
+                        format: "-"
+                })
+            })
+            var formats = dates.getFullYear() + '-' + (dates.getMonth() + 1) + '-' + dates.getDate();
+            $("body").on('click', '.changeBox button', function (e) {
+                $(this).addClass('active').siblings().removeClass('active')
+                var type = $(this).attr('data-type');
+                if (type == 2) {
+                    $(this).parents('.choiceDateTitle').siblings('.dateContent').html('')
+                    $(".timeInputBox").css({
+                        'display': 'flex'
+                    });
+                } else {
+                    $(this).parents('.choiceDateTitle').siblings('.dateContent').find('.dateContent').html('')
+                    $(".timeInputBox").css({
+                        'display': 'none'
+                    });
+                }
+                $("#dateSelectorOne,#dateSelect1,#dateSelect2").val(formats).attr('data-year', dates.getFullYear()).attr('data-month', dates.getMonth() + 1).attr('data-day', dates.getDate())
+
+            })
+            $("#dateSelectorOne,#dateSelect1,#dateSelect2").val(formats).attr('data-year', dates.getFullYear()).attr('data-month', dates.getMonth() + 1).attr('data-day', dates.getDate())
+        }
+
+    })
+    function getData(startTime,endTime) {
+        var params = {
+            pageNo: 1,
+            pageSize: 10,
+            beginTime:startTime,
+            endTime:endTime,
+            shopId:VUEDATA.shopIds,
+        }
+        reqAjaxAsync(USER_URL.GETLIST, JSON.stringify(params)).done(function (res) {
+            if (res.code == 1) {
+                var datas = res.data.list;
+                var nameArr = {
+                    0:'APP',
+                    1:'云店二维码',
+                    2:'店内二维码',
+                    3:'小程序',
+                }
+                $.each(datas,function(i,item){
+                    item.visitFromName = nameArr[item.visitFrom]
+                })
+                if(res.data.total == 0 || VUEDATA.startTime){
+                    VUEDATA.itemList = [];
+                }else{
+                    $(".nodata").hide();
+                }
+                VUEDATA.total = res.data.total;
+                setData(VUEDATA.itemList, datas)
+            }
+        }).done(function (res) {
+            if (VUEDATA.total >= params.pageSize) {
+                $('body').dropload({
+                    scrollArea: window,
+                    loadDownFn: function (me) {
+                        params.pageNo++;
+                        // 拼接HTML
+                        var result = ``;
+                        var localList = JSON.parse(window.sessionStorage.getItem('ACTIVELISTS'));
+                        if (localList.length === VUEDATA.total) {//判断缓存数据和请求数据 长度是否相等
+                            // 为了测试，延迟1秒加载
+                            setTimeout(function () {
+                                // 每次数据插入，必须重置
+                                //                            me.lock();
+                                // 无数据
+                                me.noData();
+                                me.resetload();
+                            }, 500);
+                            VUEDATA.itemList = JSON.parse(window.sessionStorage.getItem('ACTIVELISTS'))
+                            return false;
+                        } else {
+                            reqAjaxAsync(USER_URL.GETLIST, JSON.stringify(params)).done(function (res) {
+                                if (res.code == 1) {
+                                    var data = res.data.list;
+                                    //                            console.log(datas)
+                                    if (data.length > 0) {
+                                        setData(VUEDATA.itemList, data)
+                                        // 如果没有数据
+                                        // window.sessionStorage.setItem('ACTIVELISTS', JSON.stringify(VUEDATA.itemList))
+                                        // console.log(JSON.parse(window.sessionStorage.getItem('ACTIVELISTS')))
+                                    } else {
+                                        // 锁定
+                                        me.lock();
+                                        // 无数据
+                                        me.noData();
+                                    }
+                                    // 为了测试，延迟1秒加载
+                                    setTimeout(function () {
+                                        // 插入数据到页面，放到最后面
+                                        //                                $('.lists').append(result);
+                                        // 每次数据插入，必须重置
+                                        me.resetload();
+                                    }, 500);
+                                } else {
+                                    layer.msg(res.msg);
+                                }
+                            })
+                        }
+
+
+
+                    }
+                });
+            } else if (res.data.total === 0) {
+                $('.lists').html(`<li class="nodata">暂无数据</li>`)
+                $(".dropload-down").remove()
+            }
+
+        })
+        function setData(arrList, data) {
+            for (var i = 0; i < data.length; i++) {
+                arrList.push(data[i]);
+            }
+            window.sessionStorage.setItem('ACTIVELISTS', JSON.stringify(VUEDATA.itemList))
+        }
+    }
+
+</script>
+
+<!--<script src="assets/swiper-4.0.7/dist/js/swiper.min.js"></script>-->
+
+</html>

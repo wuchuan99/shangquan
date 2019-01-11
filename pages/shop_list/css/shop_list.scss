@@ -1,0 +1,163 @@
+body {
+    background-color: #F0EEEE;
+}
+.layout {
+    header {
+        background-color: #fff;
+        height:1.12rem;
+        line-height: 1.12rem;
+        font-size: 0.34rem;
+        font-weight: 600;
+        text-align: center;
+        position: relative;
+        color: #333;
+        border-bottom: 1px solid #eee;
+        .back {
+            position: absolute;
+            width: 0.22rem;
+            height: 0.4rem;
+            left: 0.24rem;
+            top: 0.36rem;
+            img {
+                width: 100%;
+                transform: rotate(180deg);
+            }
+        }
+        .editBusiness {
+            position: absolute;
+            width: 0.44rem;
+            height: 0.44rem;
+            right: 1.26rem; 
+            top: 0.34rem;
+            img {
+                width: 100%;
+            }
+        }
+        .message {
+            position: absolute;
+            width: 0.44rem;
+            height: 0.44rem;
+            right: 0.4rem; 
+            top: 0.34rem;
+            img {
+                width: 100%;
+            }
+            span {
+                position: absolute;
+                width: 0.14rem;
+                height: 0.14rem;
+                background-color: red;
+                border-radius: 50%;
+                top: -0.04rem;
+                right: -0.04rem;
+                display: none;
+            }
+        }
+    }
+    .content {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 1.12rem;
+        bottom: 0;
+        .mui-table-view {
+            background-color: #F0EEEE;
+            &:before {
+                height: 0;
+            }
+            &:after {
+                height: 0;
+            }
+        }
+        li {
+            overflow: hidden;
+            margin-bottom: 0.2rem;
+            background-color: #fff;
+            padding: 0;
+            &:after {
+                height: 0;
+            }
+            .mui-btn {
+                padding: 0 0.3rem;
+            }
+            .edit,
+            .editOut {
+                background-color: #3B82EE;
+            }
+            .delete {
+                background-color: #9E9E9E;
+            }
+            .left {
+                float: left;
+                height: 0.8rem;
+                width: 0.8rem;
+                margin: 0.05rem 0.21rem 0.15rem 0.29rem;
+                border-radius: 50%;
+                overflow: hidden;
+                img {
+                    width: 100%;
+                    height: 100%;
+                }
+            }
+            .right {
+                padding-left: 1.3rem;
+                h4 {
+                    margin-top: 0.14rem;
+                    font-size: 0.3rem;
+                    height: 0.46rem;
+                    line-height: 0.46rem;
+                    font-weight:500;
+                    color:rgba(51,51,51,1);
+                    .council {
+                        width: 0.6rem;
+                        height: 0.3rem;
+                        display: inline-block;
+                        vertical-align: middle;
+                        margin-bottom: 0.05rem;
+                    }
+                    .leader {
+                        width: 0.36rem;
+                        height: 0.3rem;
+                        display: inline-block;
+                        vertical-align: middle;
+                        margin-left: 0.05rem;
+                        margin-bottom: 0.1rem; 
+                    }
+                    .myself {
+                        font-size: 0.14rem;
+                        background-color: #3B82EE;
+                        width: 0.72rem;
+                        // height: 0.3rem;
+                        border-radius: 0.14rem;
+                        display: inline-block;
+                        color: #fff;
+                        text-align: center;
+                        padding: 0.04rem 0;
+                        padding-top: 0.04rem;
+                        margin-bottom: 0.08rem;
+                        line-height: 0.21rem;
+                        vertical-align: middle;
+                    }
+                }
+                p {
+                    font-size: 0.24rem;
+                    font-weight:500;
+                    color: #999;
+                    img {
+                        display: inline-block;
+                        width: 0.31rem;
+                        height: 0.27rem; 
+                        margin-right: 0.06rem;
+                        vertical-align: middle;
+                        margin-bottom: 0.05rem;
+                    }
+                }
+            }
+        }
+    }
+}
+@media screen and (width: 320px) {
+    .myself {
+        line-height: 0.2rem !important;
+    }
+}

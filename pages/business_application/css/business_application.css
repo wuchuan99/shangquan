@@ -1,0 +1,139 @@
+body {
+  background-color: #F0EEEE;
+}
+
+.layout header {
+  background-color: #fff;
+  height: 1.12rem;
+  line-height: 1.12rem;
+  font-size: 0.34rem;
+  font-weight: 600;
+  text-align: center;
+  position: relative;
+  color: #333;
+}
+
+.layout header .back {
+  position: absolute;
+  width: 0.22rem;
+  height: 0.4rem;
+  left: 0.24rem;
+  top: 0.36rem;
+}
+
+.layout header .back img {
+  width: 100%;
+  transform: rotate(180deg);
+}
+
+.layout .content {
+  margin-top: 0.1rem;
+  background-color: #fff;
+}
+
+.layout .content .top {
+  height: 1.3rem;
+  padding: 0.14rem 0.3rem;
+}
+
+.layout .content .top .left {
+  width: 0.9rem;
+  height: 0.9rem;
+  float: left;
+  overflow: hidden;
+}
+
+.layout .content .top .left img {
+  width: 100%;
+}
+
+.layout .content .top .right {
+  padding-left: 1.1rem;
+}
+
+.layout .content .top .right .business h4 {
+  font-size: 0.34rem;
+  color: #333;
+}
+
+.layout .content .top .right .business p {
+  font-size: 0.26rem;
+  margin-top: 0.15rem;
+  color: #333;
+}
+
+.layout .content .top .right .business p img {
+  width: 0.26rem;
+  height: 0.24rem;
+  display: inline-block;
+  vertical-align: middle;
+  margin-bottom: 0.05rem;
+  margin-right: 0.1rem;
+}
+
+.layout .content .top .right .shop {
+  height: 0.9rem;
+  line-height: 0.9rem;
+  font-size: 0.32rem;
+}
+
+.layout .content .bottom {
+  height: 1.1rem;
+  line-height: 1.1rem;
+  font-size: 0.3rem;
+  padding: 0 0.26rem;
+  border-top: 1px solid #eee;
+}
+
+.layout .content .bottom p span:first-child {
+  color: #999;
+}
+
+.layout .content .bottom p span:last-child {
+  color: #333;
+  margin-left: 0.32rem;
+}
+
+.layout .footer {
+  margin-top: 0.72rem;
+  padding: 0 0.3rem;
+}
+
+.layout .footer a {
+  float: left;
+  width: 3.2rem;
+  height: 0.8rem;
+  text-align: center;
+  line-height: 0.8rem;
+  font-size: 0.3rem;
+  border-radius: 0.08rem;
+}
+
+.layout .footer a:first-child {
+  background-color: #fff;
+  color: #333;
+}
+
+.layout .footer a:last-child {
+  background-color: #3B82EE;
+  color: #fff;
+  margin-left: 0.5rem;
+}
+
+.layout .footer .countermand {
+  height: 0.8rem;
+  text-align: center;
+  line-height: 0.8rem;
+  font-size: 0.3rem;
+  border-radius: 0.08rem;
+  background-color: #3B82EE;
+  color: #fff;
+}
+
+.layout .msg_agree,
+.layout .msg_refuse {
+  font-size: 0.26rem;
+  color: #333;
+  text-align: center;
+  margin-top: 0.3rem;
+}

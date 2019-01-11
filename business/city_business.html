@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0" user-scalable="no"/>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>同城商圈</title>
+    <link rel="stylesheet" href="../assets/mui-master/dist/css/mui.min.css">
+    <link rel="stylesheet" href="../css/reset.css">
+    <link rel="stylesheet" href="../pages/city_business/css/city_business.css">
+    <style>
+        /*移除底部或顶部三角,需要在删除此代码*/
+        .mui-popover .mui-popover-arrow:after {
+            width: 0px;
+        }
+        #popover {
+            left: 50% !important;
+            top: 50% !important;
+            transform: translate(-50%, -50%) !important;
+            padding: 10px;
+            background-color: #fff;
+            height: auto !important;
+        }
+    </style>
+</head>
+<body>
+    <div class="layout">
+        <!-- <header>
+            <span>同城商圈</span>
+            <a href="javascript:;" class="back"><img src="../pages/city_business/images/back.png" alt=""></a>
+        </header> -->
+        <div class="mui-scroll-wrapper content">
+            <div class="mui-scroll">
+                <ul class="mui-table-view list">
+                    
+                </ul>
+            </div>
+        </div>
+        <div class="zw" style="font-size: 0.4rem; display: none" >
+            <h3 >暂无商圈</h3>
+        </div>
+    </div>
+    <div id="popover" class="mui-popover" style="height: 250px;">
+        <div class="mui-popover-arrow"></div>
+        <form class="mui-input-group">
+            <div class="mui-input-row">
+                <label>昵称</label>
+                <input id="name" type="text" class="mui-input-clear" placeholder="请输入昵称">
+            </div>
+            <div class="mui-input-row">
+                <label>手机号</label>
+                <input id="phone" type="text" class="mui-input-clear" placeholder="请输入手机号">
+            </div>
+            <div class="mui-input-row">
+                <label>申请信息</label>
+                <textarea id="message" style="resize:none" class="info" maxlength="20" placeholder="最多能输入20字"></textarea>
+            </div>
+            
+            <div class="mui-button-row">
+                <button type="button" class="mui-btn mui-btn-primary" id="confirm">确认</button>
+                <button type="button" class="mui-btn mui-btn-danger" id="cancel">取消</button>
+            </div>
+        </form>
+    </div>
+    <script type="text/html" id="temp">
+        {{each data}}
+        <li class="mui-table-view-cell mui-media" data-id="{{$value.id}}">
+            <img class="mui-media-object mui-pull-left left" src="{{$value.bdPic ? $value.bdPic : '../pages/city_business/images/t1.png'}}">
+            <div class="mui-media-body right">
+                <span>{{$value.bdName}}</span>
+                <p class='mui-ellipsis'><img src="../pages/city_business/images/t3.png" alt=""><span>共有{{$value.shopCount}}家店铺</span></p>
+            </div>
+            <div class="btn"><a href="javascript:;"><img src="../pages/city_business/images/t2.png" alt=""></a></div>   
+        </li>
+        {{/each}}
+    </script>
+</body>
+    <script src="../js/rem.js"></script>
+    <script src="../js/jquery.min.js"></script>
+    <script src="../assets/art-template/lib/template-web.js"></script>
+    <script src="../assets/mui-master/dist/js/mui.min.js"></script>
+    <script src="../assets/layer/layer.js"></script>
+    <script src="../js/util.js"></script>
+    <script src="../pages/city_business/js/city_business.js"></script>
+</html>

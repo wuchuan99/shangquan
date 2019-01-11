@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0" user-scalable="no"/>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>消息</title>
+    <link rel="stylesheet" href="../assets/mui-master/dist/css/mui.min.css">
+    <link rel="stylesheet" href="../css/reset.css">
+    <link rel="stylesheet" href="../pages/message_list/css/message_list.css">
+    <style>
+        /*移除底部或顶部三角,需要在删除此代码*/
+        .mui-popover .mui-popover-arrow:after {
+            width: 0px;
+        }
+        #popover {
+            left: 50% !important;
+            top: 50% !important;
+            transform: translate(-50%, -50%) !important;
+            padding: 10px;
+            background-color: #fff;
+            height: auto !important;
+        }
+    </style>
+</head>
+<body>
+    <div class="layout">
+        <!-- <header>
+            <span>消息</span>
+            <a href="../business/shop_list.html" class="back"><img src="../pages/message_list/images/back.png" alt="" /></a>
+            <a href="javascript:;" class="empty" data-statu="all">清空</a>
+        </header> -->
+        <div class="header">
+            <div class="applicationCategory">
+                <a href="javascript:;" data-statu="received" class="applicationsReceived applicationActive">收到的申请</a>
+                <a href="javascript:;" data-statu="issued" class="applicationIssued">发出的申请</a>
+            </div>
+            <div class="tab">
+                <a href="javascript:;" data-statu="all" class="active">全部(<span class="all">0</span>)</a>
+                <a href="javascript:;" data-statu="untreated">未处理(<span class="untreated">0</span>)</a>
+                <a href="javascript:;" data-statu="agreed">已同意(<span class="agreed">0</span>)</a>
+                <a href="javascript:;" data-statu="refused">已拒绝(<span class="refused">0</span>)</a>
+                <a href="javascript:;" data-statu="other">其他(<span class="other">0</span>)</a>
+                <input type="hidden" class="state" data-statu="all">
+                <input type="hidden" class="stateApplication" data-statu="received">
+            </div>
+        </div>
+        <div class="content mui-scroll-wrapper">
+            <div class="mui-scroll">
+                <ul class="mui-table-view list">
+
+                </ul>
+            </div>
+        </div>
+        <div class="zw">
+            <h3>暂无消息</h3>
+        </div>
+    </div>
+    <div id="popover" class="mui-popover" style="height: 250px;">
+        <div class="mui-popover-arrow"></div>
+        <form class="mui-input-group">
+            <div class="mui-input-row">
+                <label>昵称：</label>
+                <p id="name"></p>
+            </div>
+            <div class="mui-input-row">
+                <label>手机号：</label>
+                <p id="phone"></p>
+            </div>
+            <div class="mui-input-row">
+                <label>申请信息：</label>
+                <p class="info"></p>
+            </div>
+        </form>
+    </div>
+    <script type="text/html" id="temp">
+        {{each data}}
+        <li class="mui-table-view-cell mui-media" data-param="{{$value}}">
+        <div class="box">
+            <div class="left" style="{{$value.type == 1 ? 'border-radius: 50%' : ''}}"><img class="" src="{{$value.bdPic}}"></div>
+            <span style="{{$value.applyStatus == 0 ? '' : 'display: none'}}"></span>
+        </div>
+        <div class="mui-media-body right"><span>{{$value.applyName + ($value.applyCount == 1 ? '' : '等') + '的入圈申请'}}</span></div>
+        <span class="time">{{$value.time}}</span>
+        </li>
+        {{/each}}
+    </script>
+    <script type="text/html" id="tem">
+        {{each data}}
+        <li class="mui-table-view-cell mui-media" data-param="{{$value}}">
+            <div style="font-size: 0.3rem; {{$value.messageStatus == 1 ? 'font-weight: 700' : 'font-weight: 500; color: #ccc'}}">来自{{$value.userName}}的消息</div>
+            <span class="time" style="top: 0.13rem">{{$value.time}}</span>
+        </li>
+        {{/each}}
+    </script>
+    <script type="text/html" id="applicationIssued">
+        <li class="mui-table-view-cell mui-media">
+            <div class="box">
+                <div class="left"><img class="" src=""></div>
+            </div>
+            <div class="mui-media-body right"><span>申请加入徐东商圈</span></div>
+            <span class="time">待验证</span>
+        </li>
+    </script>
+</body>
+    <script>
+        window.addEventListener('pageshow', function (event) {
+            if (event.persisted) {
+                window.location.reload(); 
+            } 
+        });
+    </script>
+    <script src="../js/rem.js"></script>
+    <script src="../js/jquery.min.js"></script>
+    <script src="../assets/art-template/lib/template-web.js"></script>
+    <script src="../assets/mui-master/dist/js/mui.min.js"></script>
+    <script src="../assets/layer/layer.js"></script>
+    <script src="../js/util.js"></script>
+    <script src="../pages/message_list/js/message_list.js"></script>
+</html>
